@@ -96,9 +96,7 @@ class AdminData::SearchController  < AdminData::BaseController
 
   def handle_advance_search_action_type_delete
     count = @klass.send(:count, @cond);
-    @klass.paginated_each( :order => @order, :conditions => @cond ) do |record|
-      @klass.send(:delete, record)
-    end
+    @klass.send(:delete_all, @cond)    
     @success_message = "#{count} record deleted "
   end
 

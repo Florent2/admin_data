@@ -286,6 +286,13 @@ class AdminData::SearchControllerTest < ActionController::TestCase
                             }
     end
     should_respond_with :success
+     should 'destroy records matching condition' do
+       assert !Article.find_by_short_desc('rails')
+       assert !Article.find_by_short_desc(nil)      
+     end
+     should 'not destroy records not matching condition' do
+       assert Article.find_by_short_desc('ruby')
+     end
   end
 
   context 'xhr advance_search with destroy_all action' do
